@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title >TO DO APP</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+</head>
+<body>
+
+<div style="margin-top: 50px;" class="ui container">
+    <div>
+    <h1  class="ui center aligned header">To Do List</h1>
+    <form class="ui form" action="{{ url_for('add') }}" method="post">
+        <div class="field">
+            <label>Enter the task</label>
+            <input type="text" name="name">
+            <br>
+            <br>
+            <button  class="ui blue button" type="submit">Add Task</button>
+
+            <a class="ui red button" href="{{url_for('delete_completed')}}">Delete Done</a>
+        </div>
+    </form><br><br>
+
+
+        {%for todo in todo_list%}
+        <div class="ui segment">
+            <li class="list-group-item {% if todo.done %}todo-done{% endif %}">
+								{{ todo.text }}
+            </li>
+
+            {%if todo.done == False%}
+                <span class="ui grey label">Not Done</span>
+            {%else%}
+                <span class="ui green label">Done</span>
+            {%endif%}
+             <a class="ui blue button" href="{{ url_for('update') }}">Update</a>
+            <a class="ui red button" href="{{url_for('delete')}}">Delete</a>
+
+
+        </div>
+         {%endfor%}
+
+
+
+
+
+</div>
+</div>
+</body>
+</html>
